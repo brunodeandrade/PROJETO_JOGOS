@@ -1,0 +1,81 @@
+<canvas id='tela' width='650' height='480'>
+</canvas>
+
+
+
+<script>
+tela=document.getElementById('tela');
+d=tela.getContext('2d');
+
+function carregaImagem(image, src)
+{
+   image.onload = function(){desenha();};
+   image.src = src;
+}
+
+direcao=40;
+direcao=38;
+direcao=39;
+direcao=37;
+x=0;
+y=0;
+
+img = new Array(new Image(), new Image(), new Image(), new Image(),new Image(), new Image(), new Image());
+
+carregaImagem(img[0], 'bola.png');
+carregaImagem(img[1], 'crono_baixo.png');
+carregaImagem(img[2], 'crono_cima.png');
+carregaImagem(img[3], 'crono_direita.png');
+carregaImagem(img[4], 'crono_esquerda.png');
+carregaImagem(img[5], 'crono_frente.png');
+carregaImagem(img[6], 'monstro.png');
+
+function inputTeclado(event){
+   d.clearRect(x,y,30,40);
+   switch(event.keyCode)
+   {
+       case 37:
+        x=x-30;
+	direcao=37;
+	break;
+       case 38:
+        y=y-30;
+        direcao=38;
+       break;
+       case 39:
+	x=x+30;
+        direcao=39;
+       break;
+       case 40:
+        y=y+30;
+        direcao=40;
+       break;
+   }
+desenha();
+}
+
+window.onkeydown=inputTeclado;
+
+function desenha()
+{
+	d.drawImage(img[6],150,150);
+	
+	if (direcao==38)
+   	  d.drawImage(img[2],x,y);
+            
+           else if(direcao==40){
+              d.drawImage(img[1],x,y);
+            }
+              else if(direcao==37){
+                 d.drawImage(img[4],x,y);
+                }  
+                  else if(direcao==39)
+                    d.drawImage(img[3],x,y);					
+	
+}
+
+
+
+window.onload=desenha;
+
+</script>
